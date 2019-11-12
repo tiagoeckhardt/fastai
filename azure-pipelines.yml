@@ -88,6 +88,10 @@ jobs:
       testResultsFiles: 'result.xml'
       testRunTitle: 'Python $(python.version)'
       condition: succeededOrFailed()
+      PathtoPublish: 'dist/fastai'
+      ArtifactName: 'fastai'
+      publishLocation: 'Container'
+      displayName: 'Artifacts'
 
     # Jupyter Test
   - script: |
@@ -180,6 +184,10 @@ jobs:
       testResultsFiles: 'result.xml'
       testRunTitle: 'Python $(python.version)'
       condition: succeededOrFailed()
+      PathtoPublish: 'dist/fastai'
+      ArtifactName: 'fastai'
+      publishLocation: 'Container'
+      displayName: 'Artifacts'
 
     # Jupyter Test
   - script: |
@@ -194,8 +202,6 @@ jobs:
       jupyter kernelspec list | grep python3
     displayName: 'Run jupyter notebook tests'
     continueOnError: false
-
-
 
 ################
 ### MacOS CI ###
@@ -370,6 +376,12 @@ jobs:
     displayName: 'Run jupyter notebook tests'
     continueOnError: false
 
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: 'dist/fastai'
+    ArtifactName: 'fastai'
+    publishLocation: 'Container'
+  displayName: 'Artifacts'
 
 
 
@@ -388,6 +400,10 @@ jobs:
     inputs:
       versionSpec: '3.6'
       architecture: 'x64'
+      PathtoPublish: 'dist/fastai'
+      ArtifactName: 'fastai'
+      publishLocation: 'Container'
+      displayName: 'Artifacts'
 
 
     # Install nbformat
@@ -395,6 +411,7 @@ jobs:
       pip install nbformat
     displayName: 'Install nbformat'
     continueOnError: false
+
 
     # check that notebooks are stripped out. if they aren't that means the committer doesn't have the correct configuration for the stripout filter.
   - script: |
@@ -413,3 +430,4 @@ jobs:
     displayName: 'Detect corrupted or unstripped out notebook commits'
     failOnStderr: true
     continueOnError: false
+
