@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('error') {
       steps {
-        sh 'pip3 install -e ".[dev]"'
+        sh 'pwd'
       }
     }
   }
